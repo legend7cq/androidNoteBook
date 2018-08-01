@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoadingView">
+        <attr name="start" format="boolean"/>
+    </declare-styleable>
+    
+    <declare-styleable name="StrokeTextView">
+        <attr name="strokenColor" format="color"/>
+        <attr name="strokenWidth" format="dimension"/>
+        <attr name="strokenNeed" format="boolean"/>
+    </declare-styleable>
+
+</resources>

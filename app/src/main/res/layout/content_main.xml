@@ -9,13 +9,42 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/rv_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <q.c.z.note.myview.LoadingView1
+                android:id="@+id/lv_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <q.c.z.note.myview.StrokeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black"
+                android:padding="10dp"
+                android:letterSpacing="0.1"
+                android:text="还没有录入作品哦！"
+                android:textColor="@android:color/holo_orange_light"
+                app:strokenColor="@android:color/holo_red_light"
+                app:strokenWidth="5dp"
+                android:textSize="30sp"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>
