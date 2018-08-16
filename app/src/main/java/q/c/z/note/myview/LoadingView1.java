@@ -25,28 +25,28 @@ import q.c.z.note.utils.CommUitls;
 
 /**
  *
- * ÊµÏÖÂß¼­¾ÍÊÇ£¬
- * ÏÈ»­µ×Í¼£¨¾ÍÊÇ×îÖÕÏÔÊ¾µÄĞÎ×´£©
- * È»ºó»­ÑÕÉ«¾ØĞÎºÍµ×Í¼µş¼Ó£¬»­±ÊÊôĞÔSRC_IN
- * Ê¹ÓÃÊôĞÔ¶¯»­Öğ½¥ĞŞ¸Ä£¬¾ØĞÎÑÕÉ«Õ¼±È
+ * å®ç°é€»è¾‘å°±æ˜¯ï¼Œ
+ * å…ˆç”»åº•å›¾ï¼ˆå°±æ˜¯æœ€ç»ˆæ˜¾ç¤ºçš„å½¢çŠ¶ï¼‰
+ * ç„¶åç”»é¢œè‰²çŸ©å½¢å’Œåº•å›¾å åŠ ï¼Œç”»ç¬”å±æ€§SRC_IN
+ * ä½¿ç”¨å±æ€§åŠ¨ç”»é€æ¸ä¿®æ”¹ï¼ŒçŸ©å½¢é¢œè‰²å æ¯”
  */
 public class LoadingView1 extends View {
 
-    private final RectF rectF; //»æÖÆ¾ØĞÎ
+    private final RectF rectF; //ç»˜åˆ¶çŸ©å½¢
     private final ValueAnimator animator;
     private final Paint mPaintFan;
     private Bitmap bg;
-    private int bgH = 0;//¸ß¶È
+    private int bgH = 0;//é«˜åº¦
     private final int bgW;
     private final int[] colors = new int[4];
-    private int cp = 3; //»­±ÊÑÕÉ«Ö¸Õë£¬µÚÒ»¸ö¾ØĞÎÑÕÉ«,´Ó×îºóÒ»¸ö¿ªÊ¼È¡ÑÕÉ«
+    private int cp = 3; //ç”»ç¬”é¢œè‰²æŒ‡é’ˆï¼Œç¬¬ä¸€ä¸ªçŸ©å½¢é¢œè‰²,ä»æœ€åä¸€ä¸ªå¼€å§‹å–é¢œè‰²
 
-    private final int addWidth; //viewÔö¼Ó¿í¶È,Ïà¶ÔÓÚbgµÄ¸ß¿í£¬ÎªÁËĞı×ªcanvasºó»æÖÆµÄ¾ØĞÎÄÜ¹»È«²¿¸²¸Çbg
+    private final int addWidth; //viewå¢åŠ å®½åº¦,ç›¸å¯¹äºbgçš„é«˜å®½ï¼Œä¸ºäº†æ—‹è½¬canvasåç»˜åˆ¶çš„çŸ©å½¢èƒ½å¤Ÿå…¨éƒ¨è¦†ç›–bg
 
-    private final int colorTot = 4; //ÑÕÉ«×ÜÊı
-    private final float scale = 0.25f; //Ò»ÖÖÑÕÉ«Õ¼±È
+    private final int colorTot = 4; //é¢œè‰²æ€»æ•°
+    private final float scale = 0.25f; //ä¸€ç§é¢œè‰²å æ¯”
 
-    private Rotate3dAnimation mRotate3dAnimation;//ÊÓÍ¼3d·­×ª
+    private Rotate3dAnimation mRotate3dAnimation;//è§†å›¾3dç¿»è½¬
 
     public LoadingView1(Context context) {
         this(context, null);
@@ -93,7 +93,7 @@ public class LoadingView1 extends View {
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationRepeat(Animator animation) {
-                //onAnimationUpdate·µ»ØÖµ£¬²»×¼È·£¬ÓĞÊ±²»ÄÜ·µ×îºóÖµ
+                //onAnimationUpdateè¿”å›å€¼ï¼Œä¸å‡†ç¡®ï¼Œæœ‰æ—¶ä¸èƒ½è¿”æœ€åå€¼
                 --cp;
                 if (cp < 0) {
                     cp = colorTot - 1;
@@ -102,7 +102,7 @@ public class LoadingView1 extends View {
         });
 
 
-        //3d·­×ª£¬Ã»ÓĞÊ¹ÓÃ
+        //3dç¿»è½¬ï¼Œæ²¡æœ‰ä½¿ç”¨
         mRotate3dAnimation = new Rotate3dAnimation(0, 360,
                 bgW / 2 + addWidth, 0, 0, false);
         mRotate3dAnimation.setDuration(3000);
@@ -150,14 +150,14 @@ public class LoadingView1 extends View {
         canvas.drawBitmap(bg, addWidth, CommUitls.dip2px(getContext(), 10), null);
         canvas.rotate(30, bgW / 2, bgH / 2);
 
-        //µÚÒ»¸ö¾ØĞÎ,×Ü¹²Îå¸ö
+        //ç¬¬ä¸€ä¸ªçŸ©å½¢,æ€»å…±äº”ä¸ª
         mPaintFan.setColor(colors[cp]);
         canvas.drawRect(rectF, mPaintFan);
 
-        for (int i = 1; i < colorTot + 1; ++i) { //Ê£ÏÂ4¸ö
+        for (int i = 1; i < colorTot + 1; ++i) { //å‰©ä¸‹4ä¸ª
             rectF.top = rectF.bottom;
-            rectF.bottom += bgH * scale; //×Ü¹²ËÄÖÖÑÕÉ«Ã¿Ñù25%¡£µÚÒ»¸ö¾ØĞÎºÍ×îºóÒ»¸ö¾ØĞÎÎªÍ¬Ò»ÖÖÑÕÉ«¹²Õ¼25%
-            mPaintFan.setColor(colors[(cp + i) % colorTot]); //Ñ­»·È¡ÑÕÉ«
+            rectF.bottom += bgH * scale; //æ€»å…±å››ç§é¢œè‰²æ¯æ ·25%ã€‚ç¬¬ä¸€ä¸ªçŸ©å½¢å’Œæœ€åä¸€ä¸ªçŸ©å½¢ä¸ºåŒä¸€ç§é¢œè‰²å…±å 25%
+            mPaintFan.setColor(colors[(cp + i) % colorTot]); //å¾ªç¯å–é¢œè‰²
             canvas.drawRect(rectF, mPaintFan);
         }
 
@@ -175,8 +175,8 @@ public class LoadingView1 extends View {
         int measuredHeight;
         if (widthMode == MeasureSpec.EXACTLY) {
             measuredWidth = widthSize;
-        } else {// warp_content£¬×Ô¼º¼ÆËãview´óĞ¡
-            measuredWidth = bgW + 2 * addWidth; //bgÁ½±ß¸÷addWidth
+        } else {// warp_contentï¼Œè‡ªå·±è®¡ç®—viewå¤§å°
+            measuredWidth = bgW + 2 * addWidth; //bgä¸¤è¾¹å„addWidth
         }
 
         if (heightMode == MeasureSpec.EXACTLY) {

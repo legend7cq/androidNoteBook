@@ -14,7 +14,7 @@ import java.util.List;
 import q.c.z.note.R;
 
 /**
- * 2018Äê6ÔÂ15ÈÕ09:54:40  zcq
+ * 2018å¹´6æœˆ15æ—¥09:54:40  zcq
  */
 public class RvDiffUtilAdapter extends RecyclerView.Adapter<RvDiffUtilAdapter.singHolder> {
 
@@ -30,16 +30,16 @@ public class RvDiffUtilAdapter extends RecyclerView.Adapter<RvDiffUtilAdapter.si
         return adapterData;
     }
 
-    //isRefreshÊÇ·ñË¢ĞÂ
+    //isRefreshæ˜¯å¦åˆ·æ–°
     public void load(List<SongInfoBean> data, boolean isRefresh) {
-        List<SongInfoBean> temp = new ArrayList<>(adapterData);//¾ÉÊı¾İ
+        List<SongInfoBean> temp = new ArrayList<>(adapterData);//æ—§æ•°æ®
         if (isRefresh) {
             adapterData.clear();
         }
         adapterData.addAll(data);
 
 //        notifyDataSetChanged();
-        //ÔİÊ±²»ÖªÕ¦ĞŞ¸Ä¶¯»­0.0
+        //æš‚æ—¶ä¸ä½¿ç”¨ä¸‹é¢æ–¹æ³•æ›´æ–°ï¼Œå› ä¸ºè®¾è®¡ä¸è¦åŠ¨ç”»ï¼Œæš‚æ—¶ä¸çŸ¥å’‹ä¿®æ”¹åŠ¨ç”»0.0ï¼Œæ‰€æœ‰ä½¿ç”¨ä¸Šé¢è€æ–¹æ³•äº†ã€‚ã€‚ã€‚ã€‚
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCallBack(temp, adapterData), true);
         diffResult.dispatchUpdatesTo(this);
     }
@@ -67,19 +67,19 @@ public class RvDiffUtilAdapter extends RecyclerView.Adapter<RvDiffUtilAdapter.si
 
     }
 
-    //ÓĞÊı¾İ±ä»¯µÄ£¬Èç¹û²»ĞèÒª¶¨ÏòË¢ĞÂÔò²»ĞèÒªÖØĞ´¸Ã·½·¨
+    //æœ‰æ•°æ®å˜åŒ–çš„ï¼Œå¦‚æœä¸éœ€è¦å®šå‘åˆ·æ–°åˆ™ä¸éœ€è¦é‡å†™è¯¥æ–¹æ³•
     @Override
     public void onBindViewHolder(singHolder holder, final int position, List<Object> payloads) {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
-            //ÓĞÊı¾İ±ä»¯
+            //æœ‰æ•°æ®å˜åŒ–
             Bundle payload = (Bundle) payloads.get(0);
             SongInfoBean bean = adapterData.get(position);
             for (String key : payload.keySet()) {
                 switch (key) {
                     case "KEY_DESC":
-//                        ÕâÀï¿ÉÒÔÓÃpayloadÀïµÄÊı¾İ£¬²»¹ıdataÒ²ÊÇĞÂµÄ Ò²¿ÉÒÔÓÃ
+                        //è¿™é‡Œå¯ä»¥ç”¨payloadé‡Œçš„æ•°æ®ï¼Œä¸è¿‡dataä¹Ÿæ˜¯æ–°çš„ ä¹Ÿå¯ä»¥ç”¨
                         holder.mProgress.setText(bean.getProgress());
                         break;
 //                    case "KEY_PIC":
@@ -106,56 +106,56 @@ public class RvDiffUtilAdapter extends RecyclerView.Adapter<RvDiffUtilAdapter.si
         void onclick(View view, int postion);
     }
 
-    //Êı¾İ±È½Ï½øĞĞË¢ĞÂ
+    //æ•°æ®æ¯”è¾ƒè¿›è¡Œåˆ·æ–°
     public static class DiffCallBack extends DiffUtil.Callback {
-        private List<SongInfoBean> mOldDatas, mNewDatas;//¿´Ãû×Ö
+        private List<SongInfoBean> mOldDatas, mNewDatas;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         public DiffCallBack(List<SongInfoBean> mOldDatas, List<SongInfoBean> mNewDatas) {
             this.mOldDatas = mOldDatas;
             this.mNewDatas = mNewDatas;
         }
 
-        //ÀÏÊı¾İ¼¯size
+        //è€æ•°æ®é›†size
         @Override
         public int getOldListSize() {
             return mOldDatas != null ? mOldDatas.size() : 0;
         }
 
-        //ĞÂÊı¾İ¼¯size
+        //æ–°æ•°æ®é›†size
         @Override
         public int getNewListSize() {
             return mNewDatas != null ? mNewDatas.size() : 0;
         }
 
-        //ÅĞ¶Ï Á½¸ö¶ÔÏóÊÇ·ñÊÇÏàÍ¬µÄItem¡£Èç¹ûÄãµÄItemÓĞÎ¨Ò»µÄid×Ö¶Î£¬Õâ¸ö·½·¨¾Í ÅĞ¶ÏidÊÇ·ñÏàµÈ¡£
+        //åˆ¤æ–­ ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦æ˜¯ç›¸åŒçš„Itemã€‚å¦‚æœä½ çš„Itemæœ‰å”¯ä¸€çš„idå­—æ®µï¼Œè¿™ä¸ªæ–¹æ³•å°± åˆ¤æ–­idæ˜¯å¦ç›¸ç­‰ã€‚
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
             return mOldDatas.get(oldItemPosition).getProgress() == mNewDatas.get(newItemPosition).getProgress();
         }
 
-        //ÅĞ¶ÏÏàÍ¬µÄitemÊÇ·ñ¸Ä±äÁËÆäÖĞÒ»Ğ©×Ö¶ÎÖµÊı¾İ£¬Õâ¸ö·½·¨½ö½öÔÚareItemsTheSame()·µ»ØtrueÊ±£¬²Åµ÷ÓÃ¡£
+        //åˆ¤æ–­ç›¸åŒçš„itemæ˜¯å¦æ”¹å˜äº†å…¶ä¸­ä¸€äº›å­—æ®µå€¼æ•°æ®ï¼Œè¿™ä¸ªæ–¹æ³•ä»…ä»…åœ¨areItemsTheSame()è¿”å›trueæ—¶ï¼Œæ‰è°ƒç”¨ã€‚
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
             SongInfoBean beanOld = mOldDatas.get(oldItemPosition);
             SongInfoBean beanNew = mNewDatas.get(newItemPosition);
 //            if (!beanOld.getMusicName().equals(beanNew.getMusicName())) {
-//                return false;//Èç¹ûÓĞÄÚÈİ²»Í¬£¬¾Í·µ»Øfalse
+//                return false;//å¦‚æœæœ‰å†…å®¹ä¸åŒï¼Œå°±è¿”å›false
 //            }
             if (beanOld.getProgress() != beanNew.getProgress()) {
-                return false;//Èç¹ûÓĞÄÚÈİ²»Í¬£¬¾Í·µ»Øfalse
+                return false;//å¦‚æœæœ‰å†…å®¹ä¸åŒï¼Œå°±è¿”å›false
             }
-            return true; //Ä¬ÈÏÁ½¸ödataÄÚÈİÊÇÏàÍ¬µÄ
+            return true; //é»˜è®¤ä¸¤ä¸ªdataå†…å®¹æ˜¯ç›¸åŒçš„
         }
 
         @Override
         public Object getChangePayload(int oldItemPosition, int newItemPosition) {
-            // ¶¨ÏòË¢ĞÂÖĞµÄ²¿·Ö¸üĞÂ£¬Ö»ĞŞ¸Äitem¸Ä±äµÄÊı¾İ×Ö¶Î£¬Èç¹û²»ÖØĞ´Õâ¸ö·½·¨ÔòÒ»¸ö×Ö¶Î¸Ä±ä»áË¢ĞÂÕû¸öitemÄÚÈİ
-            // Ğ§ÂÊ×î¸ß¡£¡£¡£¡£¡£Ò»°ã²»ÓÃ°É¡£¡£¡£¡£Èç¹ûÖØĞ´Õâ¸ö£¬ÔòÒªÖØĞ´onBindViewHolderÈı¸ö²ÎÊıµÄÅäºÏÊ¹ÓÃ¡£¡£¡£
-            // ÄÇÃ´¶¨ÏòË¢ĞÂÖ»ĞèÒª¶àÖØĞ´¸Ã·½·¨ºÍonBindViewHolderµÄÈı¸ö²ÎÊıµÄ·½·¨¡£
+            // å®šå‘åˆ·æ–°ä¸­çš„éƒ¨åˆ†æ›´æ–°ï¼Œåªä¿®æ”¹itemæ”¹å˜çš„æ•°æ®å­—æ®µï¼Œå¦‚æœä¸é‡å†™è¿™ä¸ªæ–¹æ³•åˆ™ä¸€ä¸ªå­—æ®µæ”¹å˜ä¼šåˆ·æ–°æ•´ä¸ªitemå†…å®¹
+            // æ•ˆç‡æœ€é«˜ã€‚ã€‚ã€‚ã€‚ã€‚ä¸€èˆ¬ä¸ç”¨å§ã€‚ã€‚ã€‚ã€‚å¦‚æœé‡å†™è¿™ä¸ªï¼Œåˆ™è¦é‡å†™onBindViewHolderä¸‰ä¸ªå‚æ•°çš„é…åˆä½¿ç”¨ã€‚ã€‚ã€‚
+            // é‚£ä¹ˆå®šå‘åˆ·æ–°åªéœ€è¦å¤šé‡å†™è¯¥æ–¹æ³•å’ŒonBindViewHolderçš„ä¸‰ä¸ªå‚æ•°çš„æ–¹æ³•ã€‚
             SongInfoBean oldBean = mOldDatas.get(oldItemPosition);
             SongInfoBean newBean = mNewDatas.get(newItemPosition);
 
-            //ÕâÀï±È½ÏitemµÄÊı¾İ£¬±ä»¯µÄÔò±£´æ
+            //è¿™é‡Œæ¯”è¾ƒitemçš„æ•°æ®ï¼Œå˜åŒ–çš„åˆ™ä¿å­˜
             Bundle payload = new Bundle();
             if (oldBean.getProgress() != newBean.getProgress()) {
                 payload.putFloat("KEY_DESC", newBean.getProgress());
@@ -165,7 +165,7 @@ public class RvDiffUtilAdapter extends RecyclerView.Adapter<RvDiffUtilAdapter.si
 //                payload.putInt("KEY_PIC", newBean.getPic());
 //            }
 
-            if (payload.size() == 0)//Èç¹ûÃ»ÓĞ±ä»¯ ¾Í´«¿Õ
+            if (payload.size() == 0)//å¦‚æœæ²¡æœ‰å˜åŒ– å°±ä¼ ç©º
                 return null;
             return payload;//
         }

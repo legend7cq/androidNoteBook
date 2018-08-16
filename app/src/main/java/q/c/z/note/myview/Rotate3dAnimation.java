@@ -6,8 +6,8 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 /**
- * 来自：https://www.jianshu.com/p/153d9f31288d
- *视图翻转
+ * 鏉ヨ嚜锛歨ttps://www.jianshu.com/p/153d9f31288d
+ *瑙嗗浘缈昏浆
  *
  * An animation that rotates the view on the Y axis between two specified angles.
  * This animation also adds a translation on the Z axis (depth) to improve the effect.

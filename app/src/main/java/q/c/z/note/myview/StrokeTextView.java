@@ -16,18 +16,18 @@ import q.c.z.note.R;
 
 /**
  *
- * ÎÄ×ÖÃè±ß
+ * æ–‡å­—æè¾¹
  *
- * Ê¹ÓÃµÄÊ±ºò£¬ÉèÖÃµÄ×Ö·û´®ĞèÒªÔÚÁ½±ß¼ÓÉÏ¿Õ¸ñ£¬
- * ²»È»£¬Ãè±ßÏÔÊ¾²»ÍêÕû£¨×Ö·û´®Á½±ß)£¬¹À¼ÆÊÇÃè±ßµÄ¿í¶ÈÃ»ÓĞ¼ÆËã£¬µ¼ÖÂ³ö´í£©
+ * ä½¿ç”¨çš„æ—¶å€™ï¼Œè®¾ç½®çš„å­—ç¬¦ä¸²éœ€è¦åœ¨ä¸¤è¾¹åŠ ä¸Šç©ºæ ¼ï¼Œ
+ * ä¸ç„¶ï¼Œæè¾¹æ˜¾ç¤ºä¸å®Œæ•´ï¼ˆå­—ç¬¦ä¸²ä¸¤è¾¹)ï¼Œä¼°è®¡æ˜¯æè¾¹çš„å®½åº¦æ²¡æœ‰è®¡ç®—ï¼Œå¯¼è‡´å‡ºé”™ï¼‰
  * " mm:ss "  ,
- * ÓĞµÄ²»¼Ó¿Õ¸ñÒ²Ä¾ÓĞÎÊÌâ¡£¡£¡£¡£ ´ı½â¾ö
+ * æœ‰çš„ä¸åŠ ç©ºæ ¼ä¹Ÿæœ¨æœ‰é—®é¢˜ã€‚ã€‚ã€‚ã€‚ å¾…è§£å†³
  */
 @SuppressLint("AppCompatCustomView")
 public class StrokeTextView extends TextView {
 
     private final Paint m_TextPaint;
-    private boolean isStroken; // ÊÇ·ñÃè±ß
+    private boolean isStroken; // æ˜¯å¦æè¾¹
     private final int textColor;
     private int strokenColor;
     public StrokeTextView(Context context) {
@@ -48,8 +48,8 @@ public class StrokeTextView extends TextView {
         typedArray.recycle();
 
         m_TextPaint = getPaint();
-        m_TextPaint.setShadowLayer(2, 0, 0, strokenW); // ×ÖÌåµÄÒõÓ°Ğ§¹û£¬¿ÉÒÔºöÂÔ
-        m_TextPaint.setStrokeWidth(strokenW); // Ãè±ß¿í¶È
+        m_TextPaint.setShadowLayer(2, 0, 0, strokenW); // å­—ä½“çš„é˜´å½±æ•ˆæœï¼Œå¯ä»¥å¿½ç•¥
+        m_TextPaint.setStrokeWidth(strokenW); // æè¾¹å®½åº¦
         m_TextPaint.setFakeBoldText(true);
         textColor = getCurrentTextColor();
     }
@@ -57,13 +57,13 @@ public class StrokeTextView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         if (isStroken) {
-            // ÃèÍâ²ã
-            // super.setTextColor(Color.BLUE); // ²»ÄÜÖ±½ÓÕâÃ´Éè£¬Èç´Ë»áµ¼ÖÂµİ¹é
+            // æå¤–å±‚
+            // super.setTextColor(Color.BLUE); // ä¸èƒ½ç›´æ¥è¿™ä¹ˆè®¾ï¼Œå¦‚æ­¤ä¼šå¯¼è‡´é€’å½’
             setTextColorUseReflection(strokenColor);
             m_TextPaint.setStyle(Paint.Style.STROKE);
             super.onDraw(canvas);
 
-            // ÃèÄÚ²ã£¬»Ö¸´Ô­ÏÈµÄ»­±Ê
+            // æå†…å±‚ï¼Œæ¢å¤åŸå…ˆçš„ç”»ç¬”
             setTextColorUseReflection(textColor);
             m_TextPaint.setStyle(Paint.Style.FILL);
         }
@@ -71,7 +71,7 @@ public class StrokeTextView extends TextView {
     }
 
     /**
-     * Ê¹ÓÃ·´ÉäµÄ·½·¨½øĞĞ×ÖÌåÑÕÉ«µÄÉèÖÃ
+     * ä½¿ç”¨åå°„çš„æ–¹æ³•è¿›è¡Œå­—ä½“é¢œè‰²çš„è®¾ç½®
      *
      * @param color
      */
@@ -82,11 +82,7 @@ public class StrokeTextView extends TextView {
             textColorField.setAccessible(true);
             textColorField.set(this, color);
             textColorField.setAccessible(false);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             e.printStackTrace();
         }
     }

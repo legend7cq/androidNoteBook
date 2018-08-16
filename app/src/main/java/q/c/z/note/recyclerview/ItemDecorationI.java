@@ -14,8 +14,7 @@ import q.c.z.note.utils.CommUitls;
 
 /**
  * Created by zcq on 2018/4/23.
- *
- * ×°ÊÎÆ÷
+ *è£…é¥°å™¨
  */
 
 public class ItemDecorationI extends RecyclerView.ItemDecoration {
@@ -29,7 +28,7 @@ public class ItemDecorationI extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * ¿Õ°×·Ö¸îÏß
+     * é»˜è®¤é€æ˜åˆ†å‰²
      * @param right
      * @param button
      */

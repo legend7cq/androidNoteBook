@@ -10,25 +10,25 @@ import java.util.Calendar;
 public class CommUitls {
 
     /**
-     * ¸ù¾İÊÖ»úµÄ·Ö±æÂÊ´Ó dp µÄµ¥Î» ×ª³ÉÎª px(ÏñËØ)
+     * æ ¹æ®æ‰‹æœºçš„åˆ†è¾¨ç‡ä» dp çš„å•ä½ è½¬æˆä¸º px(åƒç´ )
      */
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
-    //ÈİÁ¿´óĞ¡×ª»»
+    //å®¹é‡å¤§å°è½¬æ¢
     public static String getPrintFileSize(long size) {
-        // Èç¹û×Ö½ÚÊıÉÙÓÚ1024£¬ÔòÖ±½ÓÒÔBÎªµ¥Î»£¬·ñÔòÏÈ³ıÓÚ1024£¬ºó3Î»ÒòÌ«ÉÙÎŞÒâÒå
+        // å¦‚æœå­—èŠ‚æ•°å°‘äº1024ï¼Œåˆ™ç›´æ¥ä»¥Bä¸ºå•ä½ï¼Œå¦åˆ™å…ˆé™¤äº1024ï¼Œå3ä½å› å¤ªå°‘æ— æ„ä¹‰
         double value = (double) size;
         if (value < 1024) {
             return String.valueOf(value) + "B";
         } else {
             value = new BigDecimal(value / 1024).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
         }
-        // Èç¹ûÔ­×Ö½ÚÊı³ıÓÚ1024Ö®ºó£¬ÉÙÓÚ1024£¬Ôò¿ÉÒÔÖ±½ÓÒÔKB×÷Îªµ¥Î»
-        // ÒòÎª»¹Ã»ÓĞµ½´ïÒªÊ¹ÓÃÁíÒ»¸öµ¥Î»µÄÊ±ºò
-        // ½ÓÏÂÈ¥ÒÔ´ËÀàÍÆ
+        // å¦‚æœåŸå­—èŠ‚æ•°é™¤äº1024ä¹‹åï¼Œå°‘äº1024ï¼Œåˆ™å¯ä»¥ç›´æ¥ä»¥KBä½œä¸ºå•ä½
+        // å› ä¸ºè¿˜æ²¡æœ‰åˆ°è¾¾è¦ä½¿ç”¨å¦ä¸€ä¸ªå•ä½çš„æ—¶å€™
+        // æ¥ä¸‹å»ä»¥æ­¤ç±»æ¨
         if (value < 1024) {
             return String.valueOf(value) + "KB";
         } else {
@@ -37,7 +37,7 @@ public class CommUitls {
         if (value < 1024) {
             return String.valueOf(value) + "MB";
         } else {
-            // ·ñÔòÈç¹ûÒªÒÔGBÎªµ¥Î»µÄ£¬ÏÈ³ıÓÚ1024ÔÙ×÷Í¬ÑùµÄ´¦Àí
+            // å¦åˆ™å¦‚æœè¦ä»¥GBä¸ºå•ä½çš„ï¼Œå…ˆé™¤äº1024å†ä½œåŒæ ·çš„å¤„ç†
             value = new BigDecimal(value / 1024).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
             return String.valueOf(value) + "GB";
         }
