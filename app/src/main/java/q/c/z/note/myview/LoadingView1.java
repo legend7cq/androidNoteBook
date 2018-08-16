@@ -131,6 +131,10 @@ public class LoadingView1 extends View {
     }
 
     public void destroy() {
+        if (bg == null) {
+            return;
+        }
+
         animator.cancel();
         bg.recycle();
         bg = null;
@@ -139,6 +143,10 @@ public class LoadingView1 extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (bg == null) {
+            return;
+        }
+
         canvas.drawBitmap(bg, addWidth, CommUitls.dip2px(getContext(), 10), null);
         canvas.rotate(30, bgW / 2, bgH / 2);
 

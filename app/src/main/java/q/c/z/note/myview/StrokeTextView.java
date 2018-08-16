@@ -89,7 +89,6 @@ public class StrokeTextView extends TextView {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        m_TextPaint.setColor(color);
     }
 
 

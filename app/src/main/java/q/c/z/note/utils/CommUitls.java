@@ -2,15 +2,7 @@ package q.c.z.note.utils;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaMetadataRetriever;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -23,70 +15,6 @@ public class CommUitls {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
-    }
-
-
-    //获得第一帧图片
-    private Bitmap getVideoThumbnail(String filePath) {
-//        File file = new File(filePath);
-//        if (!file.exists()) {
-//            return null;
-//        }
-
-        Bitmap bitmap = null;
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        try {
-            retriever.setDataSource(filePath);
-            bitmap = retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                retriever.release();
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
-        }
-        return bitmap;
-    }
-
-    /**
-     * 保存bitmap到本地
-     */
-    public static void saveBitmap(String picName, Bitmap mBitmap) {
-        File filePic;
-        try {
-            filePic = new File(picName);
-            if (!filePic.exists()) {
-                filePic.getParentFile().mkdirs();
-                filePic.createNewFile();
-            }
-            FileOutputStream fos = new FileOutputStream(filePic);
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 读取bitmap从本地
-     */
-    public static Bitmap getBitmap(String picName) {
-        File filePic;
-        filePic = new File(picName);
-        if (!filePic.exists()) {
-            return null;
-        } else {
-            try {
-                FileInputStream f = new FileInputStream(filePic);
-                return BitmapFactory.decodeStream(f);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
     }
 
     //容量大小转换
