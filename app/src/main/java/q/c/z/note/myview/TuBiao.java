@@ -8,7 +8,7 @@ import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
-import android.widget.TextView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +16,11 @@ import java.util.List;
 import static java.lang.Math.PI;
 
 /**
- *
+ *扇形图
  */
-public class TuBiao extends TextView {
+public class TuBiao extends View {
 
+    public static final int MIN = 20;
     private final Paint mPaintFan;
     private final Paint mPaintText;
     private final int[] colors = new int[4];
@@ -42,7 +43,7 @@ public class TuBiao extends TextView {
         for (int j = 0; j < colorTot; ++j) {
             colors[j] = Color.parseColor(cls[j]);
         }
-        rectF = new RectF(0, 0, 200, 0);
+        rectF = new RectF(0, 0, 600, 0);
         mPaintFan = new Paint();
         mPaintFan.setAntiAlias(true);
         mPaintFan.setStyle(Paint.Style.FILL);
@@ -50,40 +51,49 @@ public class TuBiao extends TextView {
         mPaintText = new Paint();
         mPaintText.setAntiAlias(true);
         mPaintText.setColor(Color.BLACK);
+        mPaintText.setTextSize(24);
     }
 
     public void setData(List<Info> d) {
         data.clear();
         data.addAll(d);
+        rectF.top = 0;
+        rectF.bottom = 0;
         invalidate();
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+
         for (int i = 0; i < data.size(); i++) {
             final Info info = data.get(i);
             float lastSweep = 0;
             SparseIntArray list = info.list;
             float sweepAngle = 360f / info.times;
-            rectF.top = rectF.bottom + 20;//上下20
-            rectF.bottom = rectF.top + 200;//高200
+            rectF.top = rectF.bottom + MIN;//上下20
+            rectF.bottom = rectF.top + rectF.right;
 
             for (int j = 0; j < list.size(); j++) {
                 mPaintFan.setColor(colors[j % colorTot]); //循环取颜色
                 float angle = sweepAngle * list.valueAt(j);
                 canvas.drawArc(rectF, lastSweep, angle, true, mPaintFan);
                 lastSweep += angle;
+                int less = MIN + j % 2 * MIN*2;//减小半径
+                float angle1 = lastSweep - angle / 2;//显示位置
                 canvas.drawText(String.valueOf(list.keyAt(j)),
-                        zuobiaoX(lastSweep-angle/2) , zuobiaoY(lastSweep-angle/2) , mPaintText);//间隔值
+                        zuobiaoX(angle1, less), zuobiaoY(angle1, less), mPaintText);//间隔值
+
                 if (list.keyAt(j) == info.zuijinJge) {
-                    canvas.drawText("卍", zuobiaoX(lastSweep-angle/3), zuobiaoY(lastSweep-angle/3), mPaintText);//最近间隔
+                    mPaintText.setColor(Color.WHITE);
+                    canvas.drawText("■", zuobiaoX(angle1, 60),
+                            zuobiaoY(angle1, 60), mPaintText);//最近间隔
+                    mPaintText.setColor(Color.BLACK);
                 }
             }
-            canvas.drawText(String.valueOf(info.qiu), rectF.right / 2-5, rectF.bottom-rectF.right / 2+5, mPaintText);//球
+            canvas.drawText(String.valueOf(info.qiu < 34 ? info.qiu : info.qiu - 33),
+                    rectF.right / 2 - 5, rectF.bottom - rectF.right / 2 + 5, mPaintText);//球
         }
-
 
     }
 
@@ -96,12 +106,12 @@ public class TuBiao extends TextView {
 //    x1   =   x0   +   r   *   cos(a   *   PI   /180   )
 //    y1   =   y0   +   r   *   sin(a   *   PI  /180   )
 
-    private float zuobiaoX(float angle) { //将半径减少20是为了将文字的显示的坐标在圆内
-        return (float) (rectF.right / 2 + (rectF.right / 2-20) * Math.cos(angle * PI / 180));
+    private float zuobiaoX(float angle, int less) { //将半径减少less是为了将文字的显示的坐标在圆内
+        return (float) (rectF.right / 2 + (rectF.right / 2 - less) * Math.cos(angle * PI / 180));
     }
 
-    private float zuobiaoY(float angle) {
-        return (float) (rectF.bottom -rectF.right / 2  + (rectF.right / 2-20) * Math.sin(angle * PI / 180));
+    private float zuobiaoY(float angle, int less) {
+        return (float) (rectF.bottom - rectF.right / 2 + (rectF.right / 2 - less) * Math.sin(angle * PI / 180));
     }
 
 
@@ -124,7 +134,7 @@ public class TuBiao extends TextView {
         if (heightMode == MeasureSpec.EXACTLY) {
             measuredHeight = heightSize;
         } else {
-            measuredHeight = (int) (rectF.right+20) * 4;
+            measuredHeight = (int) (rectF.right + MIN) * 49;
         }
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
@@ -134,6 +144,10 @@ public class TuBiao extends TextView {
         public int times = 0;//总次数
         public SparseIntArray list = new SparseIntArray(); //<间隔，次数>
         public int zuijinJge = 0;
+
+        public Info(int q) {
+            qiu = q;
+        }
     }
 
 
