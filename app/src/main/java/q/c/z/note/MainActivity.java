@@ -5,9 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import q.c.z.note.myview.TuBiao;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,28 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        TuBiao mb =findViewById(R.id.lv_tubiao);
+        List<TuBiao.Info> infos =new ArrayList<>();
+        for (int i = 1; i < 5; i++) {
+            TuBiao.Info s = new TuBiao.Info();
+            s.list.put(1,i*3);
+            s.list.put(2,i*2);
+            s.list.put(3,i);
+            s.list.put(5,i*4);
+
+            s.list.put(6,i*3);
+            s.list.put(7,i*2);
+            s.list.put(8,i);
+            s.list.put(9,i*4);
+            s.times =i*20;
+            s.qiu=i;
+            s.zuijinJge =1;
+
+            infos.add(s);
+        }
+        mb.setData(infos);
     }
 
     @Override

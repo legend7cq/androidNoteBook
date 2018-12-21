@@ -43,6 +43,11 @@
                 app:strokenWidth="5dp"
                 android:textSize="30sp"/>
 
+                <q.c.z.note.myview.TuBiao
+                    android:id="@+id/lv_tubiao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
